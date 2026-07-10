@@ -1,6 +1,8 @@
 ---
 name: prompt-sharpener
 description: Turn a rough, half-formed prompt into a sharpened, high-performing one using Anthropic's own prompt-engineering evidence. Use this whenever the user hands over a draft prompt, pastes a prompt and asks for feedback, describes a task they want to prompt Claude (or another model) to do, or says things like "help me write a prompt", "improve/fix/tighten this prompt", "make this prompt better", "sharpen this", "turn this into a system prompt", or "why isn't this prompt working". Also use when the user is building a system prompt for an app, agent, custom assistant, or GPT. Handles both one-off chat/task prompts and reusable system prompts. Reach for this even when the user doesn't say the word "prompt" but is clearly drafting instructions for a model to follow.
+metadata:
+  version: 1.0.1
 ---
 
 # Prompt Sharpener
@@ -14,6 +16,12 @@ The evidence base lives in two files, and you should read the relevant one whene
 - `references/frontier.md` — the **frontier layer**: sharper, newer, model-specific guidance (effort calibration, literal instruction following, context engineering, "give the reason not just the request", and model-behavior facts worth surfacing). Higher upside, applied with judgment.
 
 Both files carry a "source reviewed" date. Prompt-engineering guidance changes as models change, so treat these as living references — if the dates look stale, it's worth re-pulling the sources before relying on the finer points.
+
+## What you produce: a prompt, not an answer
+
+Hold onto this throughout: your output is a *sharpened prompt*, not an answer to whatever the prompt is about. It matters most when the raw material carries its own request — "do some research and think this through," "analyze this idea." Encode that request into the prompt; don't carry it out. Don't run searches, perform the analysis, or draft the deliverable yourself unless the user explicitly asks you to both sharpen *and* run it. The surrounding environment leans toward taking action and starting research, so treat this as the deliberate exception: sharpen first, act only when asked.
+
+If it's genuinely unclear whether the user wants the prompt or the answer, ask — and when you can't, default to the prompt. A "just sharpen it, don't ask" instruction (see stage 2) is itself that signal: they want the prompt, so sharpen it without executing the request inside it.
 
 ## The core loop
 
@@ -65,6 +73,8 @@ The high-value moves, in rough priority order:
 **Reach for the frontier when it fits.** Beyond the moves above, consult `references/frontier.md` for higher-upside techniques and, importantly, *model-behavior facts that are often the real fix* — for example: if the user is tuning a system prompt via the API and fighting shallow reasoning or verbosity, the `effort` setting is frequently the right lever rather than more prompt text; design briefs need a concrete alternative direction rather than a "don't use X" negation; and review/extraction prompts do better asking for full coverage plus a confidence tag than asking the model to self-filter. Surface these when they apply, and label them as the frontier bets they are.
 
 ### 4. Deliver
+
+What you're handing back is the sharpened prompt, not the answer to it. If the raw material contained a request to research or analyze, that request now lives *inside* the prompt for the user to run in a fresh session — you don't execute it here unless they explicitly asked you to sharpen and run.
 
 Return two things:
 
