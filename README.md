@@ -7,6 +7,8 @@ A [Claude Agent Skill](https://www.claude.com/skills) that turns a rough, half-f
 
 You describe the task you want to prompt a model to do (or paste a draft prompt). The skill asks a couple of targeted clarifying questions, then returns a cleaned-up prompt you can copy and paste, plus a short note on what changed and why.
 
+It hands you a **prompt to run yourself** in a fresh session — not an answer to your question. Even if your rough notes include a request like "research this and think it through," the skill encodes that into the prompt rather than doing it on the spot.
+
 ## Example
 
 **Before:**
