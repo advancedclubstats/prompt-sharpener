@@ -1,8 +1,35 @@
 # prompt-sharpener
 
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Built for Claude](https://img.shields.io/badge/built%20for-Claude-6C3EF5.svg)
+
 A [Claude Agent Skill](https://www.claude.com/skills) that turns a rough, half-formed prompt into a sharper, more effective one — grounded in Anthropic's own published prompt-engineering guidance.
 
 You describe the task you want to prompt a model to do (or paste a draft prompt). The skill asks a couple of targeted clarifying questions, then returns a cleaned-up prompt you can copy and paste, plus a short note on what changed and why.
+
+## Example
+
+**Before:**
+
+```
+summarize this article for me
+```
+
+**After (with the skill):**
+
+```
+Summarize the article in <article> tags below for a busy product manager who hasn't read it.
+
+Write 5–7 sentences covering the main claim, the key supporting evidence, and any
+limitations or caveats. Lead with the single most important takeaway. If the article
+doesn't clearly support a point, say so rather than filling the gap.
+
+<article>
+[paste the article text here]
+</article>
+```
+
+*What changed: added the audience and a length target, named exactly what to cover, put the input in an `<article>` tag so it's separated from the instructions, and added a guard against inventing unsupported claims. The skill explains each of these when it hands the prompt back.*
 
 ## What it does
 
